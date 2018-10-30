@@ -114,6 +114,34 @@ namespace _540FinalProject.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+        
+        //the methods below need views
+        public ActionResult Discount()
+        {
+            return View();
+        }
+
+        public ActionResult CreateBraider(int id)
+        {
+            //the create view for the braider needs to be linked here
+            return View();
+        }
+
+        public ActionResult AddDeleteProducts()
+        {
+            return View();
+        }
+
+        public ActionResult PayBraider()
+        {
+            return View();
+        }
+
+        public ActionResult ViewAppointments()
+        {
+            return View();
+        }
+
 
         protected override void Dispose(bool disposing)
         {

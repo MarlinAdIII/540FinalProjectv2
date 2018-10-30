@@ -115,6 +115,24 @@ namespace _540FinalProject.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult ViewPaycheck(int id)
+        {
+            //a view needs to be created to be returned
+            return View();
+        }
+        
+        public ActionResult SelectStyles(int id)
+        {
+            //a view needs to be created to be returned
+            return View();
+        }
+
+        public ActionResult ViewAppointments(int id)
+        {
+            //a view needs to be created to be returned
+            return View();
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

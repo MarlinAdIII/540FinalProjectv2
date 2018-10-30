@@ -115,6 +115,18 @@ namespace _540FinalProject.Controllers
             return RedirectToAction("Index");
         }
 
+        //the methods below need views
+        public ActionResult ViewPastOrder(int id)
+        {
+            return View();
+        }
+
+        public ActionResult ScheduleAppointment(int id)
+        {
+            return View();
+        }
+
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
