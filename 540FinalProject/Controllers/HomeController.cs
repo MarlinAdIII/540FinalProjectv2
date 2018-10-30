@@ -15,7 +15,7 @@ namespace _540FinalProject.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "{insert business name}";
 
             return View();
         }
