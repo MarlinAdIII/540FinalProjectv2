@@ -197,7 +197,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BRAIDERsController.cs" />
     <Compile Include="Controllers\CLIENTsController.cs" />
+    <Compile Include="Controllers\COMPANiesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -386,6 +388,16 @@
     <Content Include="Views\CLIENTs\Details.cshtml" />
     <Content Include="Views\CLIENTs\Edit.cshtml" />
     <Content Include="Views\CLIENTs\Index.cshtml" />
+    <Content Include="Views\BRAIDERs\Create.cshtml" />
+    <Content Include="Views\BRAIDERs\Delete.cshtml" />
+    <Content Include="Views\BRAIDERs\Details.cshtml" />
+    <Content Include="Views\BRAIDERs\Edit.cshtml" />
+    <Content Include="Views\BRAIDERs\Index.cshtml" />
+    <Content Include="Views\COMPANies\Create.cshtml" />
+    <Content Include="Views\COMPANies\Delete.cshtml" />
+    <Content Include="Views\COMPANies\Details.cshtml" />
+    <Content Include="Views\COMPANies\Edit.cshtml" />
+    <Content Include="Views\COMPANies\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
