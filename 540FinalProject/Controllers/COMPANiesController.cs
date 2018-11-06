@@ -90,7 +90,7 @@ namespace _540FinalProject.Controllers
         }
 
         // GET: COMPANies/Delete/5
-        public ActionResult Delete(byte? id)
+        /*public ActionResult Delete(byte? id)
         {
             if (id == null)
             {
@@ -113,7 +113,7 @@ namespace _540FinalProject.Controllers
             db.COMPANies.Remove(cOMPANY);
             db.SaveChanges();
             return RedirectToAction("Index");
-        }
+        }*/
         
         //the methods below need views
         public ActionResult Discount()
