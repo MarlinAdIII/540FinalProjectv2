@@ -197,6 +197,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\APPOINTMENTsController.cs" />
     <Compile Include="Controllers\BRAIDERsController.cs" />
     <Compile Include="Controllers\CLIENTsController.cs" />
     <Compile Include="Controllers\COMPANiesController.cs" />
@@ -209,6 +210,7 @@
     <Compile Include="Models\APPOINTMENT.cs">
       <DependentUpon>FPModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\APPOINTMENTsController.cs" />
     <Compile Include="Models\AspNetRole.cs">
       <DependentUpon>FPModel.tt</DependentUpon>
     </Compile>
@@ -398,6 +400,12 @@
     <Content Include="Views\COMPANies\Details.cshtml" />
     <Content Include="Views\COMPANies\Edit.cshtml" />
     <Content Include="Views\COMPANies\Index.cshtml" />
+    <Content Include="Views\Shared\_AdminLayout.cshtml" />
+    <Content Include="Views\APPOINTMENTs\Create.cshtml" />
+    <Content Include="Views\APPOINTMENTs\Delete.cshtml" />
+    <Content Include="Views\APPOINTMENTs\Details.cshtml" />
+    <Content Include="Views\APPOINTMENTs\Edit.cshtml" />
+    <Content Include="Views\APPOINTMENTs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
