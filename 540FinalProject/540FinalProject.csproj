@@ -407,6 +407,7 @@
     <Content Include="Views\APPOINTMENTs\Edit.cshtml" />
     <Content Include="Views\APPOINTMENTs\Index.cshtml" />
     <Content Include="Views\Shared\_BraiderLayout.cshtml" />
+    <Content Include="Views\Shared\_ClientLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
