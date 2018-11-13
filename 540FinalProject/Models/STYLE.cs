@@ -11,7 +11,8 @@ namespace _540FinalProject.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class STYLE
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -24,10 +25,16 @@ namespace _540FinalProject.Models
         }
     
         public byte IDStyle { get; set; }
+
+        [Display(Name = "Style")]
         public string DesigStyle { get; set; }
+
+        [Display(Name = "Description of the style")]
         public string DescriptStyle { get; set; }
         public Nullable<bool> HairProvStyle { get; set; }
         public byte[] PictureStyle { get; set; }
+
+        [Display(Name = "Price of the Style")]
         public Nullable<decimal> PriceStyle { get; set; }
         public Nullable<decimal> PriceExtrat { get; set; }
     

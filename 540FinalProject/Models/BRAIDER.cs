@@ -11,7 +11,8 @@ namespace _540FinalProject.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class BRAIDER
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,13 +23,29 @@ namespace _540FinalProject.Models
         }
     
         public int IDBraider { get; set; }
+
+        [Display(Name = "First Name")]
         public string FnameBraider { get; set; }
+
+        [Display(Name = "Middle Name")]
         public string MnameBraider { get; set; }
+
+        [Display(Name = "Last Name")]
         public string LnameBraider { get; set; }
+
+        [Display(Name = "Phone Number")]
         public string PhoneBraider { get; set; }
+
+        [Display(Name = "Cell Phone Number")]
         public string CelBraider { get; set; }
+
+        [Display(Name = "Street Address")]
         public string StreetBraider { get; set; }
+
+        [Display(Name = "County")]
         public string CountyBraider { get; set; }
+
+        [Display(Name = "Zipcode")]
         public Nullable<short> ZipCodeBraider { get; set; }
         public string EmailBraider { get; set; }
         public string IDUserBraider { get; set; }
@@ -37,8 +54,5 @@ namespace _540FinalProject.Models
         public virtual ICollection<JOBEXECUTER> JOBEXECUTERs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SKILL> SKILLS { get; set; }
-
-        //this is the connection to the visual basic user table
-        public virtual AspNetUser AspNetUser { get; set; }
     }
 }

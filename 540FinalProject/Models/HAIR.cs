@@ -11,7 +11,8 @@ namespace _540FinalProject.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class HAIR
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,6 +23,8 @@ namespace _540FinalProject.Models
         }
     
         public int IDHair { get; set; }
+
+        [Display(Name = "Hair Name")]
         public string TitleHair { get; set; }
         public int IDProd { get; set; }
     

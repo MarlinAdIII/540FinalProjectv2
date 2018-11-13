@@ -22,6 +22,7 @@ namespace _540FinalProject.Models
     {
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
+            //:base("FinalProjectDBEntities", throwIfV1Schema: false)
         {
         }
 

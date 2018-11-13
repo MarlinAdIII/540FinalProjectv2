@@ -11,7 +11,8 @@ namespace _540FinalProject.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class JOBDONE
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,9 +24,15 @@ namespace _540FinalProject.Models
     
         public int IDJobDone { get; set; }
         public int IDAppoint { get; set; }
+
+        [Display(Name = "Date job was finished")]
         public System.DateTime DateJobDone { get; set; }
+
+        [Display(Name = "Time job was finished")]
         public System.TimeSpan TimeEndJob { get; set; }
         public Nullable<byte> IDDiscount { get; set; }
+
+        [Display(Name = "Discount Amount")]
         public Nullable<decimal> DiscountAmount { get; set; }
         public string feedback { get; set; }
     

@@ -11,7 +11,8 @@ namespace _540FinalProject.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class ORDER
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,7 +23,11 @@ namespace _540FinalProject.Models
     
         public int IDOrder { get; set; }
         public int IDVendor { get; set; }
+
+        [Display(Name = "Date Ordered")]
         public Nullable<System.DateTime> DateOrder { get; set; }
+
+        [Display(Name = "Description of Order")]
         public string DescripOrder { get; set; }
     
         public virtual VENDOR VENDOR { get; set; }

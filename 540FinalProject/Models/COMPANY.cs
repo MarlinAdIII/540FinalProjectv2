@@ -28,8 +28,5 @@ namespace _540FinalProject.Models
         public Nullable<decimal> CostHairDeduct { get; set; }
         public Nullable<byte> PercentBrader { get; set; }
         public Nullable<decimal> PriceTakeOff { get; set; }
-
-        //this is the connection to the BRAIDER table
-        public virtual BRAIDER BRAIDER { get; set; }
     }
 }

@@ -24,6 +24,8 @@ namespace _540FinalProject.Models
         }
     
         public int IDProd { get; set; }
+
+        [Display(Name = "Name of Product")]
         public string TitleProd { get; set; }
         public byte IDTypeProd { get; set; }
     
