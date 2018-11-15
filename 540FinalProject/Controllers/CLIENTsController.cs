@@ -54,22 +54,19 @@ namespace _540FinalProject.Controllers
             {
                 String email = User.Identity.Name;
                 cLIENT.EmailClient = email;
-                var UserID = from u in db.AspNetUsers
-                             where u.UserName.Equals(email)
-                             select u.Id as string;
                 //System.Data.Entity.Infrastructure.DbRawSqlQuery UserID = Database.SqlQuery("SELECT Id FROM dbo.AspNetUsers WHERE Email = @p0", email);
                 //String uID = UserID.ToString();
                 var query = db.AspNetUsers.Where(x => x.UserName == email).First();
                 String uID = query.Id;
                 cLIENT.IDUserClient = uID;
                 db.CLIENTs.Add(cLIENT);
-                try
+                /*try
                 {
                     // Your code...
                     // Could also be before try if you know the exception occurs in SaveChanges
-
+                    */
                     db.SaveChanges();
-                }
+                /*}
                 catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
                 {
                     foreach (var validationErrors in dbEx.EntityValidationErrors)
@@ -81,7 +78,7 @@ namespace _540FinalProject.Controllers
                                                     validationError.ErrorMessage);
                         }
                     }
-                }
+                }*/
                 return RedirectToAction("Index");
             }
 
