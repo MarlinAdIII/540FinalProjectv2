@@ -1,12 +1,12 @@
-﻿@{@{
-        Layout = "_Layout.cshtml";
+﻿@{
+    Layout = "_Layout.cshtml";
 }
 
 <div class="navbar-collapse collapse">
     <ul class="nav navbar-nav">
         <li>@Html.ActionLink("Schedule Appointment", "Create", "Appointment")</li>
         <li>@Html.ActionLink("View Past Orders and Appointments", "ViewPastOrds", "Clients")</li>
-        <li>@Html.ActionLink("Edit Account", "Edit", new { id = Model.IDClient })</li>
+        <li>@Html.ActionLink("Edit", "Edit", "Clients") </li>
     </ul>
 </div>
 

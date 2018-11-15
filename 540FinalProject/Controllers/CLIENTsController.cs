@@ -48,10 +48,40 @@ namespace _540FinalProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "IDClient,FnameClient,MnameClient,LnameClient,PhoneClient,CelClient,StreetClient,CountyClient,ZipCodeClient,EmailClient,IDUserClient,StateClient")] CLIENT cLIENT)
         {
+            //There needs to be a way to get the UserID from the user table for IDUserClient attribute
+            //this doesn't have a value for it so you get an error
             if (ModelState.IsValid)
             {
+                String email = User.Identity.Name;
+                cLIENT.EmailClient = email;
+                var UserID = from u in db.AspNetUsers
+                             where u.UserName.Equals(email)
+                             select u.Id as string;
+                //System.Data.Entity.Infrastructure.DbRawSqlQuery UserID = Database.SqlQuery("SELECT Id FROM dbo.AspNetUsers WHERE Email = @p0", email);
+                //String uID = UserID.ToString();
+                var query = db.AspNetUsers.Where(x => x.UserName == email).First();
+                String uID = query.Id;
+                cLIENT.IDUserClient = uID;
                 db.CLIENTs.Add(cLIENT);
-                db.SaveChanges();
+                try
+                {
+                    // Your code...
+                    // Could also be before try if you know the exception occurs in SaveChanges
+
+                    db.SaveChanges();
+                }
+                catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+                {
+                    foreach (var validationErrors in dbEx.EntityValidationErrors)
+                    {
+                        foreach (var validationError in validationErrors.ValidationErrors)
+                        {
+                            System.Diagnostics.Trace.TraceInformation("Property: {0} Error: {1}",
+                                                    validationError.PropertyName,
+                                                    validationError.ErrorMessage);
+                        }
+                    }
+                }
                 return RedirectToAction("Index");
             }
 

@@ -6,6 +6,7 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using _540FinalProject.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace _540FinalProject
 {
