@@ -409,6 +409,9 @@
     <Content Include="Views\APPOINTMENTs\Index.cshtml" />
     <Content Include="Views\Shared\_BraiderLayout.cshtml" />
     <Content Include="Views\Shared\_ClientLayout.cshtml" />
+    <Content Include="Views\Home\Hairstyles.cshtml" />
+    <Content Include="Views\Home\Pricing.cshtml" />
+    <Content Include="Views\Home\Products.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

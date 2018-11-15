@@ -8,6 +8,21 @@ namespace _540FinalProject.Controllers
 {
     public class HomeController : Controller
     {
+        public ActionResult Hairstyles()
+        {
+            return View();
+        }
+
+        public ActionResult Pricing()
+        {
+            return View();
+        }
+
+        public ActionResult Products()
+        {
+            return View();
+        }
+
         public ActionResult Index()
         {
             return View();
@@ -15,7 +30,7 @@ namespace _540FinalProject.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "{insert business name}";
+            ViewBag.Message = "Palmetto Braiders";
 
             return View();
         }
