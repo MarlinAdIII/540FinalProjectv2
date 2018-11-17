@@ -163,7 +163,9 @@ namespace _540FinalProject.Controllers
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                  
+
+                    var query = db.AspNetUsers.Where(x => x.UserName == model.Email).First();
+                    int type = query.Type;
                     return RedirectToAction("Create", "CLIENTS");
 
                     

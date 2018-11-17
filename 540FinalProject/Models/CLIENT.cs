@@ -11,8 +11,7 @@ namespace _540FinalProject.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class CLIENT
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,34 +21,16 @@ namespace _540FinalProject.Models
         }
     
         public int IDClient { get; set; }
-
-        [Display(Name = "First Name")]
         public string FnameClient { get; set; }
-
-        [Display(Name = "Middle Name")]
         public string MnameClient { get; set; }
-
-        [Display(Name = "Last Name")]
         public string LnameClient { get; set; }
-
-        [Display(Name = "Phone Number")]
         public string PhoneClient { get; set; }
-
-        [Display(Name = "Cell Phone number")]
         public string CelClient { get; set; }
-
-        [Display(Name = "Street Address")]
         public string StreetClient { get; set; }
-
-        [Display(Name = "County")]
         public string CountyClient { get; set; }
-
-        [Display(Name = "Zipcode")]
         public short ZipCodeClient { get; set; }
         public string EmailClient { get; set; }
         public string IDUserClient { get; set; }
-
-        [Display(Name = "State")]
         public string StateClient { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

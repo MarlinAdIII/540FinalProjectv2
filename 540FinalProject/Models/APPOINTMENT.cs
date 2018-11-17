@@ -11,8 +11,7 @@ namespace _540FinalProject.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class APPOINTMENT
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,20 +21,10 @@ namespace _540FinalProject.Models
         }
     
         public int IDAppoint { get; set; }
-        
-        [Display(Name = "Client ID")]
         public int IDClientAppoint { get; set; }
-        
-        [Display(Name = "Style ID")]
         public byte IDStypeAppoint { get; set; }
-
-        [Display(Name = "Appointment Date")]
         public System.DateTime DateAppoint { get; set; }
-
-        [Display(Name = "Take out previous hair?")]
         public Nullable<bool> AddTakeOffAppoint { get; set; }
-
-        [Display(Name = "Appointment Start Time")]
         public Nullable<System.TimeSpan> BeginnTimeAppoint { get; set; }
     
         public virtual CLIENT CLIENT { get; set; }

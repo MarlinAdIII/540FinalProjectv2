@@ -11,8 +11,7 @@ namespace _540FinalProject.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class PRODUCT
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -25,8 +24,6 @@ namespace _540FinalProject.Models
         }
     
         public int IDProd { get; set; }
-
-        [Display(Name = "Name of Product")]
         public string TitleProd { get; set; }
         public byte IDTypeProd { get; set; }
     

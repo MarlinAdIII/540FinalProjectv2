@@ -54,8 +54,6 @@ namespace _540FinalProject.Controllers
             {
                 String email = User.Identity.Name;
                 cLIENT.EmailClient = email;
-                //System.Data.Entity.Infrastructure.DbRawSqlQuery UserID = Database.SqlQuery("SELECT Id FROM dbo.AspNetUsers WHERE Email = @p0", email);
-                //String uID = UserID.ToString();
                 var query = db.AspNetUsers.Where(x => x.UserName == email).First();
                 String uID = query.Id;
                 cLIENT.IDUserClient = uID;

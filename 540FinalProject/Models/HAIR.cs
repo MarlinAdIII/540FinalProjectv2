@@ -11,27 +11,24 @@ namespace _540FinalProject.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class HAIR
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public HAIR()
         {
-            this.DESIGNWITHs = new HashSet<DESIGNWITH>();
             this.JOBCONSUMPTIONs = new HashSet<JOBCONSUMPTION>();
+            this.DESIGNWITHs = new HashSet<DESIGNWITH>();
         }
     
         public int IDHair { get; set; }
-
-        [Display(Name = "Hair Name")]
         public string TitleHair { get; set; }
         public int IDProd { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DESIGNWITH> DESIGNWITHs { get; set; }
         public virtual PRODUCT PRODUCT { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<JOBCONSUMPTION> JOBCONSUMPTIONs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DESIGNWITH> DESIGNWITHs { get; set; }
     }
 }

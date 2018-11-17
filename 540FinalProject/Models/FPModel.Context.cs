@@ -26,7 +26,6 @@ namespace _540FinalProject.Models
         }
     
         public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
-        public virtual DbSet<APPOINTMENT> APPOINTMENTs { get; set; }
         public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
         public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
@@ -35,22 +34,23 @@ namespace _540FinalProject.Models
         public virtual DbSet<CATALOG> CATALOGs { get; set; }
         public virtual DbSet<CLIENT> CLIENTs { get; set; }
         public virtual DbSet<COMPANY> COMPANies { get; set; }
-        public virtual DbSet<DESIGNWITH> DESIGNWITHs { get; set; }
         public virtual DbSet<DISCOUNT> DISCOUNTs { get; set; }
         public virtual DbSet<EXTRAT> EXTRATs { get; set; }
-        public virtual DbSet<EXTRATSTYLE> EXTRATSTYLEs { get; set; }
         public virtual DbSet<HAIR> HAIR { get; set; }
         public virtual DbSet<JOBCONSUMPTION> JOBCONSUMPTIONs { get; set; }
-        public virtual DbSet<JOBDONE> JOBDONEs { get; set; }
-        public virtual DbSet<JOBEXECUTER> JOBEXECUTERs { get; set; }
         public virtual DbSet<NEED> NEEDs { get; set; }
         public virtual DbSet<NEEDPRODUCT> NEEDPRODUCTs { get; set; }
         public virtual DbSet<ORDER> ORDERs { get; set; }
         public virtual DbSet<ORDERPRODUCT> ORDERPRODUCTs { get; set; }
         public virtual DbSet<PRODUCT> PRODUCTs { get; set; }
-        public virtual DbSet<SKILL> SKILLS { get; set; }
-        public virtual DbSet<STYLE> STYLEs { get; set; }
         public virtual DbSet<TYPEPRODUCT> TYPEPRODUCTs { get; set; }
         public virtual DbSet<VENDOR> VENDORs { get; set; }
+        public virtual DbSet<APPOINTMENT> APPOINTMENTs { get; set; }
+        public virtual DbSet<DESIGNWITH> DESIGNWITHs { get; set; }
+        public virtual DbSet<EXTRATSTYLE> EXTRATSTYLEs { get; set; }
+        public virtual DbSet<JOBDONE> JOBDONEs { get; set; }
+        public virtual DbSet<JOBEXECUTER> JOBEXECUTERs { get; set; }
+        public virtual DbSet<SKILL> SKILLS { get; set; }
+        public virtual DbSet<STYLE> STYLEs { get; set; }
     }
 }

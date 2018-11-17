@@ -76,7 +76,7 @@
           <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
           <Property Name="AccessFailedCount" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
-          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="Type" Type="smallint" />
         </EntityType>
         <EntityType Name="BRAIDER">
           <Key>
@@ -135,7 +135,7 @@
           <Property Name="EmailComp" Type="varchar" MaxLength="50" />
           <Property Name="WebsiteComp" Type="varchar" MaxLength="50" />
           <Property Name="PartPayeBraid" Type="float" />
-          <Property Name="IDOwnerBraider" Type="int" />
+          <Property Name="IDOwnerBraider" Type="nvarchar" MaxLength="128" />
           <Property Name="CostHairDeduct" Type="money" />
           <Property Name="PercentBrader" Type="tinyint" />
           <Property Name="PriceTakeOff" Type="money" />
@@ -779,20 +779,6 @@
           <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
           <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
-        <EntityType Name="APPOINTMENT">
-          <Key>
-            <PropertyRef Name="IDAppoint" />
-          </Key>
-          <Property Name="IDAppoint" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IDClientAppoint" Type="Int32" Nullable="false" />
-          <Property Name="IDStypeAppoint" Type="Byte" Nullable="false" />
-          <Property Name="DateAppoint" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="AddTakeOffAppoint" Type="Boolean" />
-          <Property Name="BeginnTimeAppoint" Type="Time" Precision="7" />
-          <NavigationProperty Name="CLIENT" Relationship="Self.FK_APPOINTMENT_CLIENT" FromRole="APPOINTMENT" ToRole="CLIENT" />
-          <NavigationProperty Name="STYLE" Relationship="Self.FK_APPOINTMENT_STYLE" FromRole="APPOINTMENT" ToRole="STYLE" />
-          <NavigationProperty Name="JOBDONEs" Relationship="Self.FK_JOBDONE_APPOINTMENT" FromRole="APPOINTMENT" ToRole="JOBDONE" />
-        </EntityType>
         <EntityType Name="AspNetRole">
           <Key>
             <PropertyRef Name="Id" />
@@ -841,7 +827,7 @@
           <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_AspNetUserClaims_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_AspNetUserLogins_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
-          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="Type" Type="Int32" />
         </EntityType>
         <EntityType Name="BRAIDER">
           <Key>
@@ -858,8 +844,8 @@
           <Property Name="ZipCodeBraider" Type="Int16" />
           <Property Name="EmailBraider" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IDUserBraider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="JOBEXECUTERs" Relationship="Self.FK_JOBEXECUTER_BRAIDER" FromRole="BRAIDER" ToRole="JOBEXECUTER" />
-          <NavigationProperty Name="SKILLS" Relationship="Self.FK_SKILLS_BRAIDER" FromRole="BRAIDER" ToRole="SKILLS" />
+          <NavigationProperty Name="JOBEXECUTERs" Relationship="FinalProjectDBModel.FK_JOBEXECUTER_BRAIDER" FromRole="BRAIDER" ToRole="JOBEXECUTER" />
+          <NavigationProperty Name="SKILLS" Relationship="FinalProjectDBModel.FK_SKILLS_BRAIDER" FromRole="BRAIDER" ToRole="SKILL" />
         </EntityType>
         <EntityType Name="CATALOG">
           <Key>
@@ -889,7 +875,7 @@
           <Property Name="EmailClient" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IDUserClient" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="StateClient" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="APPOINTMENTs" Relationship="Self.FK_APPOINTMENT_CLIENT" FromRole="CLIENT" ToRole="APPOINTMENT" />
+          <NavigationProperty Name="APPOINTMENTs" Relationship="FinalProjectDBModel.FK_APPOINTMENT_CLIENT" FromRole="CLIENT" ToRole="APPOINTMENT" />
         </EntityType>
         <EntityType Name="COMPANY">
           <Key>
@@ -910,16 +896,6 @@
           <Property Name="PercentBrader" Type="Byte" />
           <Property Name="PriceTakeOff" Type="Decimal" Precision="19" Scale="4" />
         </EntityType>
-        <EntityType Name="DESIGNWITH">
-          <Key>
-            <PropertyRef Name="IDDesignWith" />
-          </Key>
-          <Property Name="IDDesignWith" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IDStyle" Type="Byte" Nullable="false" />
-          <Property Name="IDHair" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="HAIR" Relationship="Self.FK_DESIGNWITH_HAIR" FromRole="DESIGNWITH" ToRole="HAIR" />
-          <NavigationProperty Name="STYLE" Relationship="Self.FK_DESIGNWITH_STYLE" FromRole="DESIGNWITH" ToRole="STYLE" />
-        </EntityType>
         <EntityType Name="DISCOUNT">
           <Key>
             <PropertyRef Name="IDDiscount" />
@@ -927,7 +903,7 @@
           <Property Name="IDDiscount" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TitleDiscount" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="AmountDiscount" Type="Decimal" Precision="19" Scale="4" />
-          <NavigationProperty Name="JOBDONEs" Relationship="Self.FK_JOBDONE_DISCOUNT" FromRole="DISCOUNT" ToRole="JOBDONE" />
+          <NavigationProperty Name="JOBDONEs" Relationship="FinalProjectDBModel.FK_JOBDONE_DISCOUNT" FromRole="DISCOUNT" ToRole="JOBDONE" />
         </EntityType>
         <EntityType Name="EXTRAT">
           <Key>
@@ -935,17 +911,7 @@
           </Key>
           <Property Name="IDExtrat" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TitleExtrat" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="EXTRATSTYLEs" Relationship="Self.FK_EXTRATSTYLE_EXTRAT" FromRole="EXTRAT" ToRole="EXTRATSTYLE" />
-        </EntityType>
-        <EntityType Name="EXTRATSTYLE">
-          <Key>
-            <PropertyRef Name="IDExtratStyle" />
-          </Key>
-          <Property Name="IDExtratStyle" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IDStyle" Type="Byte" Nullable="false" />
-          <Property Name="IDExtrat" Type="Byte" Nullable="false" />
-          <NavigationProperty Name="EXTRAT" Relationship="Self.FK_EXTRATSTYLE_EXTRAT" FromRole="EXTRATSTYLE" ToRole="EXTRAT" />
-          <NavigationProperty Name="STYLE" Relationship="Self.FK_EXTRATSTYLE_STYLE" FromRole="EXTRATSTYLE" ToRole="STYLE" />
+          <NavigationProperty Name="EXTRATSTYLEs" Relationship="FinalProjectDBModel.FK_EXTRATSTYLE_EXTRAT" FromRole="EXTRAT" ToRole="EXTRATSTYLE" />
         </EntityType>
         <EntityType Name="HAIR">
           <Key>
@@ -954,9 +920,9 @@
           <Property Name="IDHair" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TitleHair" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="IDProd" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="DESIGNWITHs" Relationship="Self.FK_DESIGNWITH_HAIR" FromRole="HAIR" ToRole="DESIGNWITH" />
           <NavigationProperty Name="PRODUCT" Relationship="Self.FK_HAIR_PRODUCT" FromRole="HAIR" ToRole="PRODUCT" />
           <NavigationProperty Name="JOBCONSUMPTIONs" Relationship="Self.FK_JOBCONSUMPTION_HAIR" FromRole="HAIR" ToRole="JOBCONSUMPTION" />
+          <NavigationProperty Name="DESIGNWITHs" Relationship="FinalProjectDBModel.FK_DESIGNWITH_HAIR" FromRole="HAIR" ToRole="DESIGNWITH" />
         </EntityType>
         <EntityType Name="JOBCONSUMPTION">
           <Key>
@@ -967,34 +933,7 @@
           <Property Name="IDHair" Type="Int32" Nullable="false" />
           <Property Name="QttyPacks" Type="Byte" Nullable="false" />
           <NavigationProperty Name="HAIR" Relationship="Self.FK_JOBCONSUMPTION_HAIR" FromRole="JOBCONSUMPTION" ToRole="HAIR" />
-          <NavigationProperty Name="JOBDONE" Relationship="Self.FK_JOBCONSUMPTION_JOBDONE" FromRole="JOBCONSUMPTION" ToRole="JOBDONE" />
-        </EntityType>
-        <EntityType Name="JOBDONE">
-          <Key>
-            <PropertyRef Name="IDJobDone" />
-          </Key>
-          <Property Name="IDJobDone" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IDAppoint" Type="Int32" Nullable="false" />
-          <Property Name="DateJobDone" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="TimeEndJob" Type="Time" Nullable="false" Precision="7" />
-          <Property Name="IDDiscount" Type="Byte" />
-          <Property Name="DiscountAmount" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="feedback" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="APPOINTMENT" Relationship="Self.FK_JOBDONE_APPOINTMENT" FromRole="JOBDONE" ToRole="APPOINTMENT" />
-          <NavigationProperty Name="DISCOUNT" Relationship="Self.FK_JOBDONE_DISCOUNT" FromRole="JOBDONE" ToRole="DISCOUNT" />
-          <NavigationProperty Name="JOBCONSUMPTIONs" Relationship="Self.FK_JOBCONSUMPTION_JOBDONE" FromRole="JOBDONE" ToRole="JOBCONSUMPTION" />
-          <NavigationProperty Name="JOBEXECUTERs" Relationship="Self.FK_JOBEXECUTER_JOBDONE" FromRole="JOBDONE" ToRole="JOBEXECUTER" />
-        </EntityType>
-        <EntityType Name="JOBEXECUTER">
-          <Key>
-            <PropertyRef Name="IDJobExecut" />
-          </Key>
-          <Property Name="IDJobExecut" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IDJobDone" Type="Int32" Nullable="false" />
-          <Property Name="IDBraider" Type="Int32" Nullable="false" />
-          <Property Name="BraidingLocat" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="BRAIDER" Relationship="Self.FK_JOBEXECUTER_BRAIDER" FromRole="JOBEXECUTER" ToRole="BRAIDER" />
-          <NavigationProperty Name="JOBDONE" Relationship="Self.FK_JOBEXECUTER_JOBDONE" FromRole="JOBEXECUTER" ToRole="JOBDONE" />
+          <NavigationProperty Name="JOBDONE" Relationship="FinalProjectDBModel.FK_JOBCONSUMPTION_JOBDONE" FromRole="JOBCONSUMPTION" ToRole="JOBDONE" />
         </EntityType>
         <EntityType Name="NEED">
           <Key>
@@ -1052,32 +991,6 @@
           <NavigationProperty Name="ORDERPRODUCTs" Relationship="Self.FK_ORDERPRODUCT_PRODUCT" FromRole="PRODUCT" ToRole="ORDERPRODUCT" />
           <NavigationProperty Name="TYPEPRODUCT" Relationship="Self.FK_PRODUCT_TYPEPRODUCT" FromRole="PRODUCT" ToRole="TYPEPRODUCT" />
         </EntityType>
-        <EntityType Name="SKILL">
-          <Key>
-            <PropertyRef Name="IDSkill" />
-          </Key>
-          <Property Name="IDSkill" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IDBraider" Type="Int32" Nullable="false" />
-          <Property Name="IDStyle" Type="Byte" Nullable="false" />
-          <NavigationProperty Name="BRAIDER" Relationship="Self.FK_SKILLS_BRAIDER" FromRole="SKILLS" ToRole="BRAIDER" />
-          <NavigationProperty Name="STYLE" Relationship="Self.FK_SKILLS_STYLE" FromRole="SKILLS" ToRole="STYLE" />
-        </EntityType>
-        <EntityType Name="STYLE">
-          <Key>
-            <PropertyRef Name="IDStyle" />
-          </Key>
-          <Property Name="IDStyle" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DesigStyle" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="DescriptStyle" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="HairProvStyle" Type="Boolean" />
-          <Property Name="PictureStyle" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="PriceStyle" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="PriceExtrat" Type="Decimal" Precision="19" Scale="4" />
-          <NavigationProperty Name="APPOINTMENTs" Relationship="Self.FK_APPOINTMENT_STYLE" FromRole="STYLE" ToRole="APPOINTMENT" />
-          <NavigationProperty Name="DESIGNWITHs" Relationship="Self.FK_DESIGNWITH_STYLE" FromRole="STYLE" ToRole="DESIGNWITH" />
-          <NavigationProperty Name="EXTRATSTYLEs" Relationship="Self.FK_EXTRATSTYLE_STYLE" FromRole="STYLE" ToRole="EXTRATSTYLE" />
-          <NavigationProperty Name="SKILLS" Relationship="Self.FK_SKILLS_STYLE" FromRole="STYLE" ToRole="SKILLS" />
-        </EntityType>
         <EntityType Name="TYPEPRODUCT">
           <Key>
             <PropertyRef Name="IDTypeProd" />
@@ -1103,42 +1016,6 @@
           <NavigationProperty Name="CATALOGs" Relationship="Self.FK_CATALOG_VENDOR" FromRole="VENDOR" ToRole="CATALOG" />
           <NavigationProperty Name="ORDERs" Relationship="Self.FK_ORDER_VENDOR" FromRole="VENDOR" ToRole="ORDER" />
         </EntityType>
-        <Association Name="FK_APPOINTMENT_CLIENT">
-          <End Role="CLIENT" Type="Self.CLIENT" Multiplicity="1" />
-          <End Role="APPOINTMENT" Type="Self.APPOINTMENT" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CLIENT">
-              <PropertyRef Name="IDClient" />
-            </Principal>
-            <Dependent Role="APPOINTMENT">
-              <PropertyRef Name="IDClientAppoint" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_APPOINTMENT_STYLE">
-          <End Role="STYLE" Type="Self.STYLE" Multiplicity="1" />
-          <End Role="APPOINTMENT" Type="Self.APPOINTMENT" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="STYLE">
-              <PropertyRef Name="IDStyle" />
-            </Principal>
-            <Dependent Role="APPOINTMENT">
-              <PropertyRef Name="IDStypeAppoint" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_JOBDONE_APPOINTMENT">
-          <End Role="APPOINTMENT" Type="Self.APPOINTMENT" Multiplicity="1" />
-          <End Role="JOBDONE" Type="Self.JOBDONE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="APPOINTMENT">
-              <PropertyRef Name="IDAppoint" />
-            </Principal>
-            <Dependent Role="JOBDONE">
-              <PropertyRef Name="IDAppoint" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_AspNetUserClaims_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -1167,30 +1044,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_JOBEXECUTER_BRAIDER">
-          <End Role="BRAIDER" Type="Self.BRAIDER" Multiplicity="1" />
-          <End Role="JOBEXECUTER" Type="Self.JOBEXECUTER" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BRAIDER">
-              <PropertyRef Name="IDBraider" />
-            </Principal>
-            <Dependent Role="JOBEXECUTER">
-              <PropertyRef Name="IDBraider" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_SKILLS_BRAIDER">
-          <End Role="BRAIDER" Type="Self.BRAIDER" Multiplicity="1" />
-          <End Role="SKILLS" Type="Self.SKILL" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BRAIDER">
-              <PropertyRef Name="IDBraider" />
-            </Principal>
-            <Dependent Role="SKILLS">
-              <PropertyRef Name="IDBraider" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_CATALOG_PRODUCT">
           <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="1" />
           <End Role="CATALOG" Type="Self.CATALOG" Multiplicity="*" />
@@ -1215,66 +1068,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DESIGNWITH_HAIR">
-          <End Role="HAIR" Type="Self.HAIR" Multiplicity="1" />
-          <End Role="DESIGNWITH" Type="Self.DESIGNWITH" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="HAIR">
-              <PropertyRef Name="IDHair" />
-            </Principal>
-            <Dependent Role="DESIGNWITH">
-              <PropertyRef Name="IDHair" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DESIGNWITH_STYLE">
-          <End Role="STYLE" Type="Self.STYLE" Multiplicity="1" />
-          <End Role="DESIGNWITH" Type="Self.DESIGNWITH" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="STYLE">
-              <PropertyRef Name="IDStyle" />
-            </Principal>
-            <Dependent Role="DESIGNWITH">
-              <PropertyRef Name="IDStyle" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_JOBDONE_DISCOUNT">
-          <End Role="DISCOUNT" Type="Self.DISCOUNT" Multiplicity="0..1" />
-          <End Role="JOBDONE" Type="Self.JOBDONE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DISCOUNT">
-              <PropertyRef Name="IDDiscount" />
-            </Principal>
-            <Dependent Role="JOBDONE">
-              <PropertyRef Name="IDDiscount" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_EXTRATSTYLE_EXTRAT">
-          <End Role="EXTRAT" Type="Self.EXTRAT" Multiplicity="1" />
-          <End Role="EXTRATSTYLE" Type="Self.EXTRATSTYLE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EXTRAT">
-              <PropertyRef Name="IDExtrat" />
-            </Principal>
-            <Dependent Role="EXTRATSTYLE">
-              <PropertyRef Name="IDExtrat" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_EXTRATSTYLE_STYLE">
-          <End Role="STYLE" Type="Self.STYLE" Multiplicity="1" />
-          <End Role="EXTRATSTYLE" Type="Self.EXTRATSTYLE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="STYLE">
-              <PropertyRef Name="IDStyle" />
-            </Principal>
-            <Dependent Role="EXTRATSTYLE">
-              <PropertyRef Name="IDStyle" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_HAIR_PRODUCT">
           <End Role="PRODUCT" Type="Self.PRODUCT" Multiplicity="1" />
           <End Role="HAIR" Type="Self.HAIR" Multiplicity="*" />
@@ -1296,30 +1089,6 @@
             </Principal>
             <Dependent Role="JOBCONSUMPTION">
               <PropertyRef Name="IDHair" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_JOBCONSUMPTION_JOBDONE">
-          <End Role="JOBDONE" Type="Self.JOBDONE" Multiplicity="1" />
-          <End Role="JOBCONSUMPTION" Type="Self.JOBCONSUMPTION" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="JOBDONE">
-              <PropertyRef Name="IDJobDone" />
-            </Principal>
-            <Dependent Role="JOBCONSUMPTION">
-              <PropertyRef Name="IDJobDone" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_JOBEXECUTER_JOBDONE">
-          <End Role="JOBDONE" Type="Self.JOBDONE" Multiplicity="1" />
-          <End Role="JOBEXECUTER" Type="Self.JOBEXECUTER" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="JOBDONE">
-              <PropertyRef Name="IDJobDone" />
-            </Principal>
-            <Dependent Role="JOBEXECUTER">
-              <PropertyRef Name="IDJobDone" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1395,25 +1164,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_SKILLS_STYLE">
-          <End Role="STYLE" Type="Self.STYLE" Multiplicity="1" />
-          <End Role="SKILLS" Type="Self.SKILL" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="STYLE">
-              <PropertyRef Name="IDStyle" />
-            </Principal>
-            <Dependent Role="SKILLS">
-              <PropertyRef Name="IDStyle" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="AspNetUserRoles">
           <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
         </Association>
         <EntityContainer Name="FinalProjectDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
-          <EntitySet Name="APPOINTMENTs" EntityType="Self.APPOINTMENT" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
@@ -1422,35 +1178,17 @@
           <EntitySet Name="CATALOGs" EntityType="Self.CATALOG" />
           <EntitySet Name="CLIENTs" EntityType="Self.CLIENT" />
           <EntitySet Name="COMPANies" EntityType="Self.COMPANY" />
-          <EntitySet Name="DESIGNWITHs" EntityType="Self.DESIGNWITH" />
           <EntitySet Name="DISCOUNTs" EntityType="Self.DISCOUNT" />
           <EntitySet Name="EXTRATs" EntityType="Self.EXTRAT" />
-          <EntitySet Name="EXTRATSTYLEs" EntityType="Self.EXTRATSTYLE" />
           <EntitySet Name="HAIR" EntityType="Self.HAIR" />
           <EntitySet Name="JOBCONSUMPTIONs" EntityType="Self.JOBCONSUMPTION" />
-          <EntitySet Name="JOBDONEs" EntityType="Self.JOBDONE" />
-          <EntitySet Name="JOBEXECUTERs" EntityType="Self.JOBEXECUTER" />
           <EntitySet Name="NEEDs" EntityType="Self.NEED" />
           <EntitySet Name="NEEDPRODUCTs" EntityType="Self.NEEDPRODUCT" />
           <EntitySet Name="ORDERs" EntityType="Self.ORDER" />
           <EntitySet Name="ORDERPRODUCTs" EntityType="Self.ORDERPRODUCT" />
           <EntitySet Name="PRODUCTs" EntityType="Self.PRODUCT" />
-          <EntitySet Name="SKILLS" EntityType="Self.SKILL" />
-          <EntitySet Name="STYLEs" EntityType="Self.STYLE" />
           <EntitySet Name="TYPEPRODUCTs" EntityType="Self.TYPEPRODUCT" />
           <EntitySet Name="VENDORs" EntityType="Self.VENDOR" />
-          <AssociationSet Name="FK_APPOINTMENT_CLIENT" Association="Self.FK_APPOINTMENT_CLIENT">
-            <End Role="CLIENT" EntitySet="CLIENTs" />
-            <End Role="APPOINTMENT" EntitySet="APPOINTMENTs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_APPOINTMENT_STYLE" Association="Self.FK_APPOINTMENT_STYLE">
-            <End Role="STYLE" EntitySet="STYLEs" />
-            <End Role="APPOINTMENT" EntitySet="APPOINTMENTs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_JOBDONE_APPOINTMENT" Association="Self.FK_JOBDONE_APPOINTMENT">
-            <End Role="APPOINTMENT" EntitySet="APPOINTMENTs" />
-            <End Role="JOBDONE" EntitySet="JOBDONEs" />
-          </AssociationSet>
           <AssociationSet Name="FK_AspNetUserClaims_AspNetUsers_UserId" Association="Self.FK_AspNetUserClaims_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
@@ -1458,14 +1196,6 @@
           <AssociationSet Name="FK_AspNetUserLogins_AspNetUsers_UserId" Association="Self.FK_AspNetUserLogins_AspNetUsers_UserId">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
-          </AssociationSet>
-          <AssociationSet Name="FK_JOBEXECUTER_BRAIDER" Association="Self.FK_JOBEXECUTER_BRAIDER">
-            <End Role="BRAIDER" EntitySet="BRAIDERs" />
-            <End Role="JOBEXECUTER" EntitySet="JOBEXECUTERs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SKILLS_BRAIDER" Association="Self.FK_SKILLS_BRAIDER">
-            <End Role="BRAIDER" EntitySet="BRAIDERs" />
-            <End Role="SKILLS" EntitySet="SKILLS" />
           </AssociationSet>
           <AssociationSet Name="FK_CATALOG_PRODUCT" Association="Self.FK_CATALOG_PRODUCT">
             <End Role="PRODUCT" EntitySet="PRODUCTs" />
@@ -1475,26 +1205,6 @@
             <End Role="VENDOR" EntitySet="VENDORs" />
             <End Role="CATALOG" EntitySet="CATALOGs" />
           </AssociationSet>
-          <AssociationSet Name="FK_DESIGNWITH_HAIR" Association="Self.FK_DESIGNWITH_HAIR">
-            <End Role="HAIR" EntitySet="HAIR" />
-            <End Role="DESIGNWITH" EntitySet="DESIGNWITHs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DESIGNWITH_STYLE" Association="Self.FK_DESIGNWITH_STYLE">
-            <End Role="STYLE" EntitySet="STYLEs" />
-            <End Role="DESIGNWITH" EntitySet="DESIGNWITHs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_JOBDONE_DISCOUNT" Association="Self.FK_JOBDONE_DISCOUNT">
-            <End Role="DISCOUNT" EntitySet="DISCOUNTs" />
-            <End Role="JOBDONE" EntitySet="JOBDONEs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_EXTRATSTYLE_EXTRAT" Association="Self.FK_EXTRATSTYLE_EXTRAT">
-            <End Role="EXTRAT" EntitySet="EXTRATs" />
-            <End Role="EXTRATSTYLE" EntitySet="EXTRATSTYLEs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_EXTRATSTYLE_STYLE" Association="Self.FK_EXTRATSTYLE_STYLE">
-            <End Role="STYLE" EntitySet="STYLEs" />
-            <End Role="EXTRATSTYLE" EntitySet="EXTRATSTYLEs" />
-          </AssociationSet>
           <AssociationSet Name="FK_HAIR_PRODUCT" Association="Self.FK_HAIR_PRODUCT">
             <End Role="PRODUCT" EntitySet="PRODUCTs" />
             <End Role="HAIR" EntitySet="HAIR" />
@@ -1502,14 +1212,6 @@
           <AssociationSet Name="FK_JOBCONSUMPTION_HAIR" Association="Self.FK_JOBCONSUMPTION_HAIR">
             <End Role="HAIR" EntitySet="HAIR" />
             <End Role="JOBCONSUMPTION" EntitySet="JOBCONSUMPTIONs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_JOBCONSUMPTION_JOBDONE" Association="Self.FK_JOBCONSUMPTION_JOBDONE">
-            <End Role="JOBDONE" EntitySet="JOBDONEs" />
-            <End Role="JOBCONSUMPTION" EntitySet="JOBCONSUMPTIONs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_JOBEXECUTER_JOBDONE" Association="Self.FK_JOBEXECUTER_JOBDONE">
-            <End Role="JOBDONE" EntitySet="JOBDONEs" />
-            <End Role="JOBEXECUTER" EntitySet="JOBEXECUTERs" />
           </AssociationSet>
           <AssociationSet Name="FK_NEEDPRODUCT_NEED" Association="Self.FK_NEEDPRODUCT_NEED">
             <End Role="NEED" EntitySet="NEEDs" />
@@ -1535,15 +1237,314 @@
             <End Role="TYPEPRODUCT" EntitySet="TYPEPRODUCTs" />
             <End Role="PRODUCT" EntitySet="PRODUCTs" />
           </AssociationSet>
-          <AssociationSet Name="FK_SKILLS_STYLE" Association="Self.FK_SKILLS_STYLE">
-            <End Role="STYLE" EntitySet="STYLEs" />
-            <End Role="SKILLS" EntitySet="SKILLS" />
-          </AssociationSet>
           <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <EntitySet Name="APPOINTMENTs" EntityType="FinalProjectDBModel.APPOINTMENT" />
+          <EntitySet Name="DESIGNWITHs" EntityType="FinalProjectDBModel.DESIGNWITH" />
+          <EntitySet Name="EXTRATSTYLEs" EntityType="FinalProjectDBModel.EXTRATSTYLE" />
+          <EntitySet Name="JOBDONEs" EntityType="FinalProjectDBModel.JOBDONE" />
+          <EntitySet Name="JOBEXECUTERs" EntityType="FinalProjectDBModel.JOBEXECUTER" />
+          <EntitySet Name="SKILLS" EntityType="FinalProjectDBModel.SKILL" />
+          <EntitySet Name="STYLEs" EntityType="FinalProjectDBModel.STYLE" />
+          <AssociationSet Name="FK_APPOINTMENT_CLIENT" Association="FinalProjectDBModel.FK_APPOINTMENT_CLIENT">
+            <End Role="CLIENT" EntitySet="CLIENTs" />
+            <End Role="APPOINTMENT" EntitySet="APPOINTMENTs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_APPOINTMENT_STYLE" Association="FinalProjectDBModel.FK_APPOINTMENT_STYLE">
+            <End Role="STYLE" EntitySet="STYLEs" />
+            <End Role="APPOINTMENT" EntitySet="APPOINTMENTs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JOBDONE_APPOINTMENT" Association="FinalProjectDBModel.FK_JOBDONE_APPOINTMENT">
+            <End Role="APPOINTMENT" EntitySet="APPOINTMENTs" />
+            <End Role="JOBDONE" EntitySet="JOBDONEs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JOBEXECUTER_BRAIDER" Association="FinalProjectDBModel.FK_JOBEXECUTER_BRAIDER">
+            <End Role="BRAIDER" EntitySet="BRAIDERs" />
+            <End Role="JOBEXECUTER" EntitySet="JOBEXECUTERs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SKILLS_BRAIDER" Association="FinalProjectDBModel.FK_SKILLS_BRAIDER">
+            <End Role="BRAIDER" EntitySet="BRAIDERs" />
+            <End Role="SKILL" EntitySet="SKILLS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DESIGNWITH_HAIR" Association="FinalProjectDBModel.FK_DESIGNWITH_HAIR">
+            <End Role="HAIR" EntitySet="HAIR" />
+            <End Role="DESIGNWITH" EntitySet="DESIGNWITHs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DESIGNWITH_STYLE" Association="FinalProjectDBModel.FK_DESIGNWITH_STYLE">
+            <End Role="STYLE" EntitySet="STYLEs" />
+            <End Role="DESIGNWITH" EntitySet="DESIGNWITHs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JOBDONE_DISCOUNT" Association="FinalProjectDBModel.FK_JOBDONE_DISCOUNT">
+            <End Role="DISCOUNT" EntitySet="DISCOUNTs" />
+            <End Role="JOBDONE" EntitySet="JOBDONEs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EXTRATSTYLE_EXTRAT" Association="FinalProjectDBModel.FK_EXTRATSTYLE_EXTRAT">
+            <End Role="EXTRAT" EntitySet="EXTRATs" />
+            <End Role="EXTRATSTYLE" EntitySet="EXTRATSTYLEs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EXTRATSTYLE_STYLE" Association="FinalProjectDBModel.FK_EXTRATSTYLE_STYLE">
+            <End Role="STYLE" EntitySet="STYLEs" />
+            <End Role="EXTRATSTYLE" EntitySet="EXTRATSTYLEs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JOBCONSUMPTION_JOBDONE" Association="FinalProjectDBModel.FK_JOBCONSUMPTION_JOBDONE">
+            <End Role="JOBDONE" EntitySet="JOBDONEs" />
+            <End Role="JOBCONSUMPTION" EntitySet="JOBCONSUMPTIONs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JOBEXECUTER_JOBDONE" Association="FinalProjectDBModel.FK_JOBEXECUTER_JOBDONE">
+            <End Role="JOBDONE" EntitySet="JOBDONEs" />
+            <End Role="JOBEXECUTER" EntitySet="JOBEXECUTERs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SKILLS_STYLE" Association="FinalProjectDBModel.FK_SKILLS_STYLE">
+            <End Role="STYLE" EntitySet="STYLEs" />
+            <End Role="SKILL" EntitySet="SKILLS" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="APPOINTMENT">
+          <Key>
+            <PropertyRef Name="IDAppoint" />
+          </Key>
+          <Property Name="IDAppoint" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDClientAppoint" Type="Int32" Nullable="false" />
+          <Property Name="IDStypeAppoint" Type="Byte" Nullable="false" />
+          <Property Name="DateAppoint" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AddTakeOffAppoint" Type="Boolean" />
+          <Property Name="BeginnTimeAppoint" Type="Time" Precision="7" />
+          <NavigationProperty Name="CLIENT" Relationship="FinalProjectDBModel.FK_APPOINTMENT_CLIENT" FromRole="APPOINTMENT" ToRole="CLIENT" />
+          <NavigationProperty Name="STYLE" Relationship="FinalProjectDBModel.FK_APPOINTMENT_STYLE" FromRole="APPOINTMENT" ToRole="STYLE" />
+          <NavigationProperty Name="JOBDONEs" Relationship="FinalProjectDBModel.FK_JOBDONE_APPOINTMENT" FromRole="APPOINTMENT" ToRole="JOBDONE" />
+        </EntityType>
+        <EntityType Name="DESIGNWITH">
+          <Key>
+            <PropertyRef Name="IDDesignWith" />
+          </Key>
+          <Property Name="IDDesignWith" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDStyle" Type="Byte" Nullable="false" />
+          <Property Name="IDHair" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="HAIR" Relationship="FinalProjectDBModel.FK_DESIGNWITH_HAIR" FromRole="DESIGNWITH" ToRole="HAIR" />
+          <NavigationProperty Name="STYLE" Relationship="FinalProjectDBModel.FK_DESIGNWITH_STYLE" FromRole="DESIGNWITH" ToRole="STYLE" />
+        </EntityType>
+        <EntityType Name="EXTRATSTYLE">
+          <Key>
+            <PropertyRef Name="IDExtratStyle" />
+          </Key>
+          <Property Name="IDExtratStyle" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDStyle" Type="Byte" Nullable="false" />
+          <Property Name="IDExtrat" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="EXTRAT" Relationship="FinalProjectDBModel.FK_EXTRATSTYLE_EXTRAT" FromRole="EXTRATSTYLE" ToRole="EXTRAT" />
+          <NavigationProperty Name="STYLE" Relationship="FinalProjectDBModel.FK_EXTRATSTYLE_STYLE" FromRole="EXTRATSTYLE" ToRole="STYLE" />
+        </EntityType>
+        <EntityType Name="JOBDONE">
+          <Key>
+            <PropertyRef Name="IDJobDone" />
+          </Key>
+          <Property Name="IDJobDone" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDAppoint" Type="Int32" Nullable="false" />
+          <Property Name="DateJobDone" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TimeEndJob" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="IDDiscount" Type="Byte" />
+          <Property Name="DiscountAmount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="feedback" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="APPOINTMENT" Relationship="FinalProjectDBModel.FK_JOBDONE_APPOINTMENT" FromRole="JOBDONE" ToRole="APPOINTMENT" />
+          <NavigationProperty Name="DISCOUNT" Relationship="FinalProjectDBModel.FK_JOBDONE_DISCOUNT" FromRole="JOBDONE" ToRole="DISCOUNT" />
+          <NavigationProperty Name="JOBCONSUMPTIONs" Relationship="FinalProjectDBModel.FK_JOBCONSUMPTION_JOBDONE" FromRole="JOBDONE" ToRole="JOBCONSUMPTION" />
+          <NavigationProperty Name="JOBEXECUTERs" Relationship="FinalProjectDBModel.FK_JOBEXECUTER_JOBDONE" FromRole="JOBDONE" ToRole="JOBEXECUTER" />
+        </EntityType>
+        <EntityType Name="JOBEXECUTER">
+          <Key>
+            <PropertyRef Name="IDJobExecut" />
+          </Key>
+          <Property Name="IDJobExecut" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDJobDone" Type="Int32" Nullable="false" />
+          <Property Name="IDBraider" Type="Int32" Nullable="false" />
+          <Property Name="BraidingLocat" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="BRAIDER" Relationship="FinalProjectDBModel.FK_JOBEXECUTER_BRAIDER" FromRole="JOBEXECUTER" ToRole="BRAIDER" />
+          <NavigationProperty Name="JOBDONE" Relationship="FinalProjectDBModel.FK_JOBEXECUTER_JOBDONE" FromRole="JOBEXECUTER" ToRole="JOBDONE" />
+        </EntityType>
+        <EntityType Name="SKILL">
+          <Key>
+            <PropertyRef Name="IDSkill" />
+          </Key>
+          <Property Name="IDSkill" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDBraider" Type="Int32" Nullable="false" />
+          <Property Name="IDStyle" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="BRAIDER" Relationship="FinalProjectDBModel.FK_SKILLS_BRAIDER" FromRole="SKILL" ToRole="BRAIDER" />
+          <NavigationProperty Name="STYLE" Relationship="FinalProjectDBModel.FK_SKILLS_STYLE" FromRole="SKILL" ToRole="STYLE" />
+        </EntityType>
+        <EntityType Name="STYLE">
+          <Key>
+            <PropertyRef Name="IDStyle" />
+          </Key>
+          <Property Name="IDStyle" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DesigStyle" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DescriptStyle" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="HairProvStyle" Type="Boolean" />
+          <Property Name="PriceStyle" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="PriceExtrat" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="PicureStyle" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="APPOINTMENTs" Relationship="FinalProjectDBModel.FK_APPOINTMENT_STYLE" FromRole="STYLE" ToRole="APPOINTMENT" />
+          <NavigationProperty Name="DESIGNWITHs" Relationship="FinalProjectDBModel.FK_DESIGNWITH_STYLE" FromRole="STYLE" ToRole="DESIGNWITH" />
+          <NavigationProperty Name="EXTRATSTYLEs" Relationship="FinalProjectDBModel.FK_EXTRATSTYLE_STYLE" FromRole="STYLE" ToRole="EXTRATSTYLE" />
+          <NavigationProperty Name="SKILLS" Relationship="FinalProjectDBModel.FK_SKILLS_STYLE" FromRole="STYLE" ToRole="SKILL" />
+          <Property Name="PictureStyle" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_APPOINTMENT_CLIENT">
+          <End Type="FinalProjectDBModel.CLIENT" Role="CLIENT" Multiplicity="1" />
+          <End Type="FinalProjectDBModel.APPOINTMENT" Role="APPOINTMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENT">
+              <PropertyRef Name="IDClient" />
+            </Principal>
+            <Dependent Role="APPOINTMENT">
+              <PropertyRef Name="IDClientAppoint" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_APPOINTMENT_STYLE">
+          <End Type="FinalProjectDBModel.STYLE" Role="STYLE" Multiplicity="1" />
+          <End Type="FinalProjectDBModel.APPOINTMENT" Role="APPOINTMENT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STYLE">
+              <PropertyRef Name="IDStyle" />
+            </Principal>
+            <Dependent Role="APPOINTMENT">
+              <PropertyRef Name="IDStypeAppoint" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JOBDONE_APPOINTMENT">
+          <End Type="FinalProjectDBModel.APPOINTMENT" Role="APPOINTMENT" Multiplicity="1" />
+          <End Type="FinalProjectDBModel.JOBDONE" Role="JOBDONE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="APPOINTMENT">
+              <PropertyRef Name="IDAppoint" />
+            </Principal>
+            <Dependent Role="JOBDONE">
+              <PropertyRef Name="IDAppoint" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JOBEXECUTER_BRAIDER">
+          <End Type="FinalProjectDBModel.BRAIDER" Role="BRAIDER" Multiplicity="1" />
+          <End Type="FinalProjectDBModel.JOBEXECUTER" Role="JOBEXECUTER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BRAIDER">
+              <PropertyRef Name="IDBraider" />
+            </Principal>
+            <Dependent Role="JOBEXECUTER">
+              <PropertyRef Name="IDBraider" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SKILLS_BRAIDER">
+          <End Type="FinalProjectDBModel.BRAIDER" Role="BRAIDER" Multiplicity="1" />
+          <End Type="FinalProjectDBModel.SKILL" Role="SKILL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BRAIDER">
+              <PropertyRef Name="IDBraider" />
+            </Principal>
+            <Dependent Role="SKILL">
+              <PropertyRef Name="IDBraider" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DESIGNWITH_HAIR">
+          <End Type="FinalProjectDBModel.HAIR" Role="HAIR" Multiplicity="1" />
+          <End Type="FinalProjectDBModel.DESIGNWITH" Role="DESIGNWITH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HAIR">
+              <PropertyRef Name="IDHair" />
+            </Principal>
+            <Dependent Role="DESIGNWITH">
+              <PropertyRef Name="IDHair" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DESIGNWITH_STYLE">
+          <End Type="FinalProjectDBModel.STYLE" Role="STYLE" Multiplicity="1" />
+          <End Type="FinalProjectDBModel.DESIGNWITH" Role="DESIGNWITH" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STYLE">
+              <PropertyRef Name="IDStyle" />
+            </Principal>
+            <Dependent Role="DESIGNWITH">
+              <PropertyRef Name="IDStyle" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JOBDONE_DISCOUNT">
+          <End Type="FinalProjectDBModel.DISCOUNT" Role="DISCOUNT" Multiplicity="0..1" />
+          <End Type="FinalProjectDBModel.JOBDONE" Role="JOBDONE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DISCOUNT">
+              <PropertyRef Name="IDDiscount" />
+            </Principal>
+            <Dependent Role="JOBDONE">
+              <PropertyRef Name="IDDiscount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EXTRATSTYLE_EXTRAT">
+          <End Type="FinalProjectDBModel.EXTRAT" Role="EXTRAT" Multiplicity="1" />
+          <End Type="FinalProjectDBModel.EXTRATSTYLE" Role="EXTRATSTYLE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EXTRAT">
+              <PropertyRef Name="IDExtrat" />
+            </Principal>
+            <Dependent Role="EXTRATSTYLE">
+              <PropertyRef Name="IDExtrat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EXTRATSTYLE_STYLE">
+          <End Type="FinalProjectDBModel.STYLE" Role="STYLE" Multiplicity="1" />
+          <End Type="FinalProjectDBModel.EXTRATSTYLE" Role="EXTRATSTYLE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STYLE">
+              <PropertyRef Name="IDStyle" />
+            </Principal>
+            <Dependent Role="EXTRATSTYLE">
+              <PropertyRef Name="IDStyle" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JOBCONSUMPTION_JOBDONE">
+          <End Type="FinalProjectDBModel.JOBDONE" Role="JOBDONE" Multiplicity="1" />
+          <End Type="FinalProjectDBModel.JOBCONSUMPTION" Role="JOBCONSUMPTION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JOBDONE">
+              <PropertyRef Name="IDJobDone" />
+            </Principal>
+            <Dependent Role="JOBCONSUMPTION">
+              <PropertyRef Name="IDJobDone" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JOBEXECUTER_JOBDONE">
+          <End Type="FinalProjectDBModel.JOBDONE" Role="JOBDONE" Multiplicity="1" />
+          <End Type="FinalProjectDBModel.JOBEXECUTER" Role="JOBEXECUTER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JOBDONE">
+              <PropertyRef Name="IDJobDone" />
+            </Principal>
+            <Dependent Role="JOBEXECUTER">
+              <PropertyRef Name="IDJobDone" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SKILLS_STYLE">
+          <End Type="FinalProjectDBModel.STYLE" Role="STYLE" Multiplicity="1" />
+          <End Type="FinalProjectDBModel.SKILL" Role="SKILL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STYLE">
+              <PropertyRef Name="IDStyle" />
+            </Principal>
+            <Dependent Role="SKILL">
+              <PropertyRef Name="IDStyle" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1557,18 +1558,6 @@
                 <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
                 <ScalarProperty Name="Model" ColumnName="Model" />
                 <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="APPOINTMENTs">
-            <EntityTypeMapping TypeName="FinalProjectDBModel.APPOINTMENT">
-              <MappingFragment StoreEntitySet="APPOINTMENT">
-                <ScalarProperty Name="IDAppoint" ColumnName="IDAppoint" />
-                <ScalarProperty Name="IDClientAppoint" ColumnName="IDClientAppoint" />
-                <ScalarProperty Name="IDStypeAppoint" ColumnName="IDStypeAppoint" />
-                <ScalarProperty Name="DateAppoint" ColumnName="DateAppoint" />
-                <ScalarProperty Name="AddTakeOffAppoint" ColumnName="AddTakeOffAppoint" />
-                <ScalarProperty Name="BeginnTimeAppoint" ColumnName="BeginnTimeAppoint" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1684,15 +1673,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="DESIGNWITHs">
-            <EntityTypeMapping TypeName="FinalProjectDBModel.DESIGNWITH">
-              <MappingFragment StoreEntitySet="DESIGNWITH">
-                <ScalarProperty Name="IDDesignWith" ColumnName="IDDesignWith" />
-                <ScalarProperty Name="IDStyle" ColumnName="IDStyle" />
-                <ScalarProperty Name="IDHair" ColumnName="IDHair" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="DISCOUNTs">
             <EntityTypeMapping TypeName="FinalProjectDBModel.DISCOUNT">
               <MappingFragment StoreEntitySet="DISCOUNT">
@@ -1707,15 +1687,6 @@
               <MappingFragment StoreEntitySet="EXTRAT">
                 <ScalarProperty Name="IDExtrat" ColumnName="IDExtrat" />
                 <ScalarProperty Name="TitleExtrat" ColumnName="TitleExtrat" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="EXTRATSTYLEs">
-            <EntityTypeMapping TypeName="FinalProjectDBModel.EXTRATSTYLE">
-              <MappingFragment StoreEntitySet="EXTRATSTYLE">
-                <ScalarProperty Name="IDExtratStyle" ColumnName="IDExtratStyle" />
-                <ScalarProperty Name="IDStyle" ColumnName="IDStyle" />
-                <ScalarProperty Name="IDExtrat" ColumnName="IDExtrat" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1735,29 +1706,6 @@
                 <ScalarProperty Name="IDJobDone" ColumnName="IDJobDone" />
                 <ScalarProperty Name="IDHair" ColumnName="IDHair" />
                 <ScalarProperty Name="QttyPacks" ColumnName="QttyPacks" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="JOBDONEs">
-            <EntityTypeMapping TypeName="FinalProjectDBModel.JOBDONE">
-              <MappingFragment StoreEntitySet="JOBDONE">
-                <ScalarProperty Name="IDJobDone" ColumnName="IDJobDone" />
-                <ScalarProperty Name="IDAppoint" ColumnName="IDAppoint" />
-                <ScalarProperty Name="DateJobDone" ColumnName="DateJobDone" />
-                <ScalarProperty Name="TimeEndJob" ColumnName="TimeEndJob" />
-                <ScalarProperty Name="IDDiscount" ColumnName="IDDiscount" />
-                <ScalarProperty Name="DiscountAmount" ColumnName="DiscountAmount" />
-                <ScalarProperty Name="feedback" ColumnName="feedback" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="JOBEXECUTERs">
-            <EntityTypeMapping TypeName="FinalProjectDBModel.JOBEXECUTER">
-              <MappingFragment StoreEntitySet="JOBEXECUTER">
-                <ScalarProperty Name="IDJobExecut" ColumnName="IDJobExecut" />
-                <ScalarProperty Name="IDJobDone" ColumnName="IDJobDone" />
-                <ScalarProperty Name="IDBraider" ColumnName="IDBraider" />
-                <ScalarProperty Name="BraidingLocat" ColumnName="BraidingLocat" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1810,28 +1758,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="SKILLS">
-            <EntityTypeMapping TypeName="FinalProjectDBModel.SKILL">
-              <MappingFragment StoreEntitySet="SKILLS">
-                <ScalarProperty Name="IDSkill" ColumnName="IDSkill" />
-                <ScalarProperty Name="IDBraider" ColumnName="IDBraider" />
-                <ScalarProperty Name="IDStyle" ColumnName="IDStyle" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="STYLEs">
-            <EntityTypeMapping TypeName="FinalProjectDBModel.STYLE">
-              <MappingFragment StoreEntitySet="STYLE">
-                <ScalarProperty Name="IDStyle" ColumnName="IDStyle" />
-                <ScalarProperty Name="DesigStyle" ColumnName="DesigStyle" />
-                <ScalarProperty Name="DescriptStyle" ColumnName="DescriptStyle" />
-                <ScalarProperty Name="HairProvStyle" ColumnName="HairProvStyle" />
-                <ScalarProperty Name="PictureStyle" ColumnName="PictureStyle" />
-                <ScalarProperty Name="PriceStyle" ColumnName="PriceStyle" />
-                <ScalarProperty Name="PriceExtrat" ColumnName="PriceExtrat" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="TYPEPRODUCTs">
             <EntityTypeMapping TypeName="FinalProjectDBModel.TYPEPRODUCT">
               <MappingFragment StoreEntitySet="TYPEPRODUCT">
@@ -1864,6 +1790,81 @@
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="APPOINTMENTs">
+            <EntityTypeMapping TypeName="FinalProjectDBModel.APPOINTMENT">
+              <MappingFragment StoreEntitySet="APPOINTMENT">
+                <ScalarProperty Name="BeginnTimeAppoint" ColumnName="BeginnTimeAppoint" />
+                <ScalarProperty Name="AddTakeOffAppoint" ColumnName="AddTakeOffAppoint" />
+                <ScalarProperty Name="DateAppoint" ColumnName="DateAppoint" />
+                <ScalarProperty Name="IDStypeAppoint" ColumnName="IDStypeAppoint" />
+                <ScalarProperty Name="IDClientAppoint" ColumnName="IDClientAppoint" />
+                <ScalarProperty Name="IDAppoint" ColumnName="IDAppoint" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DESIGNWITHs">
+            <EntityTypeMapping TypeName="FinalProjectDBModel.DESIGNWITH">
+              <MappingFragment StoreEntitySet="DESIGNWITH">
+                <ScalarProperty Name="IDHair" ColumnName="IDHair" />
+                <ScalarProperty Name="IDStyle" ColumnName="IDStyle" />
+                <ScalarProperty Name="IDDesignWith" ColumnName="IDDesignWith" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EXTRATSTYLEs">
+            <EntityTypeMapping TypeName="FinalProjectDBModel.EXTRATSTYLE">
+              <MappingFragment StoreEntitySet="EXTRATSTYLE">
+                <ScalarProperty Name="IDExtrat" ColumnName="IDExtrat" />
+                <ScalarProperty Name="IDStyle" ColumnName="IDStyle" />
+                <ScalarProperty Name="IDExtratStyle" ColumnName="IDExtratStyle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JOBDONEs">
+            <EntityTypeMapping TypeName="FinalProjectDBModel.JOBDONE">
+              <MappingFragment StoreEntitySet="JOBDONE">
+                <ScalarProperty Name="feedback" ColumnName="feedback" />
+                <ScalarProperty Name="DiscountAmount" ColumnName="DiscountAmount" />
+                <ScalarProperty Name="IDDiscount" ColumnName="IDDiscount" />
+                <ScalarProperty Name="TimeEndJob" ColumnName="TimeEndJob" />
+                <ScalarProperty Name="DateJobDone" ColumnName="DateJobDone" />
+                <ScalarProperty Name="IDAppoint" ColumnName="IDAppoint" />
+                <ScalarProperty Name="IDJobDone" ColumnName="IDJobDone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JOBEXECUTERs">
+            <EntityTypeMapping TypeName="FinalProjectDBModel.JOBEXECUTER">
+              <MappingFragment StoreEntitySet="JOBEXECUTER">
+                <ScalarProperty Name="BraidingLocat" ColumnName="BraidingLocat" />
+                <ScalarProperty Name="IDBraider" ColumnName="IDBraider" />
+                <ScalarProperty Name="IDJobDone" ColumnName="IDJobDone" />
+                <ScalarProperty Name="IDJobExecut" ColumnName="IDJobExecut" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SKILLS">
+            <EntityTypeMapping TypeName="FinalProjectDBModel.SKILL">
+              <MappingFragment StoreEntitySet="SKILLS">
+                <ScalarProperty Name="IDStyle" ColumnName="IDStyle" />
+                <ScalarProperty Name="IDBraider" ColumnName="IDBraider" />
+                <ScalarProperty Name="IDSkill" ColumnName="IDSkill" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="STYLEs">
+            <EntityTypeMapping TypeName="FinalProjectDBModel.STYLE">
+              <MappingFragment StoreEntitySet="STYLE">
+                <ScalarProperty Name="PictureStyle" ColumnName="PictureStyle" />
+                <ScalarProperty Name="PriceExtrat" ColumnName="PriceExtrat" />
+                <ScalarProperty Name="PriceStyle" ColumnName="PriceStyle" />
+                <ScalarProperty Name="HairProvStyle" ColumnName="HairProvStyle" />
+                <ScalarProperty Name="DescriptStyle" ColumnName="DescriptStyle" />
+                <ScalarProperty Name="DesigStyle" ColumnName="DesigStyle" />
+                <ScalarProperty Name="IDStyle" ColumnName="IDStyle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
